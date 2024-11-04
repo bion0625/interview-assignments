@@ -1,8 +1,8 @@
 package com.assignments.domain.vo.request;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class AuthRequest {
     private String username;
     private String password;
