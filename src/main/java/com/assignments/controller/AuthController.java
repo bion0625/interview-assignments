@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<?> register(@RequestBody AuthRequest request) {
+    public ResponseEntity<?> join(@RequestBody AuthRequest request) {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
