@@ -15,7 +15,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -25,15 +24,13 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(AuthController.class)
+@WebMvcTest(UserController.class)
 @AutoConfigureMockMvc
 @Import(SecurityConfig.class)
-class AuthControllerTest {
+class UserControllerTest {
 
     private final MockMvc mockMvc;
 
@@ -42,63 +39,101 @@ class AuthControllerTest {
     @MockBean
     private UserRepository userRepository;
 
-    @MockBean
-    private PasswordEncoder passwordEncoder;
-
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    public AuthControllerTest(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) {
+    public UserControllerTest(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) {
         this.mockMvc = mockMvc;
         this.objectMapper = objectMapper;
     }
 
     @Test
-    public void testLoginSuccess() throws Exception {
+    public void testAddUserSuccess() throws Exception {
         // given
-        when(passwordEncoder.matches(any(), any())).thenReturn(true);
-        when(userRepository.findByUsername(any())).thenReturn(Optional.of(new User()));
-
+        when(userRepository.findByUsername(any())).thenReturn(Optional.empty());
         Map<String, String> request = Map.of(
                 "username", "test",
-                "password", "qwer135!");
+                "password", "qwer135!",
+                "name", "testName",
+                "gender", "M",
+                "age", "30",
+                "phone", "01012341234");
 
         // when & then
-        mockMvc.perform(post("/login")
+        mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.token").exists());
+                .andExpect(status().isCreated());
     }
 
     @Test
-    public void testLoginFailure() throws Exception {
+    public void testAddUserFailure() throws Exception {
         // given
-        when(passwordEncoder.matches(any(), any())).thenReturn(false);
         when(userRepository.findByUsername(any())).thenReturn(Optional.of(new User()));
-
         Map<String, String> request = Map.of(
                 "username", "test",
-                "password", "qwer135!");
+                "password", "qwer135!",
+                "name", "testName",
+                "gender", "M",
+                "age", "30",
+                "phone", "01012341234");
 
         // when & then
-        mockMvc.perform(post("/login")
+        mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
-    public void testProtectedSuccess() throws Exception {
+    public void testGetUserSuccess() throws Exception {
         // given
+        User expectedUser = new User();
+        expectedUser.setId(1L);
+        when(userRepository.findById(any())).thenReturn(Optional.of(expectedUser));
+
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + getToken());
 
-        // when & then
-        MvcResult user = mockMvc.perform(get("/protected")
+        // when
+        MvcResult result = mockMvc.perform(get("/users/" + expectedUser.getId())
                         .headers(headers))
                 .andExpect(status().isOk()).andReturn();
-        System.out.println(user);
+        String content = result.getResponse().getContentAsString();
+        User user = objectMapper.readValue(content, User.class);
+
+        // then
+        assert user.getId().equals(expectedUser.getId());
+    }
+
+    @Test
+    public void testUpdateUserSuccess() throws Exception {
+        // given
+        User user = new User();
+        user.setId(1L);
+        user.setName("modify");
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + getToken());
+        Map<String, String> request = Map.of(
+                "id", "1",
+                "username", "test",
+                "password", "qwer135!",
+                "name", "testName",
+                "gender", "M",
+                "age", "30",
+                "phone", "01012341234");
+
+        // when & then
+        MvcResult result = mockMvc.perform(put("/users/" + request.get("id"))
+                        .headers(headers)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andReturn();
+        String content = result.getResponse().getContentAsString();
+        User modifiedUser = objectMapper.readValue(content, User.class);
+        assert modifiedUser.getName().equals(request.get("name"));
     }
 
     private String getToken() {
@@ -110,11 +145,4 @@ class AuthControllerTest {
                 .compact();
     }
 
-    @Test
-    public void testProtectedFailure() throws Exception {
-        // given
-        // when & then
-        mockMvc.perform(get("/protected"))
-                .andExpect(status().isForbidden());
-    }
 }

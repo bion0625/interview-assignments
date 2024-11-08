@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.Optional;
 
 @RestController
 public class AuthController {
@@ -30,17 +29,6 @@ public class AuthController {
     public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @PostMapping("/join")
-    public ResponseEntity<HttpStatus> join(@RequestBody AuthRequest request) {
-        Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
-        if (optionalUser.isPresent()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        User user = new User();
-        user.setUsername(request.getUsername());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        userRepository.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
