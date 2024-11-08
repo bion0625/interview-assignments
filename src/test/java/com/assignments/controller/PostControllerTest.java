@@ -35,7 +35,7 @@ class PostControllerTest {
     @Test
     public void testGetPostSuccess() throws Exception {
         // given
-        when(postRepository.findById(any())).thenReturn(Optional.of(new Post()));
+        when(postRepository.findByIdAndDeletedAtIsNull(any())).thenReturn(Optional.of(new Post()));
 
         // when & then
         mockMvc.perform(get("/posts/" + 1)).andExpect(status().isOk());
@@ -44,7 +44,7 @@ class PostControllerTest {
     @Test
     public void testAddPostFailure() throws Exception {
         // given
-        when(postRepository.findById(any())).thenReturn(Optional.of(new Post()));
+        when(postRepository.findByIdAndDeletedAtIsNull(any())).thenReturn(Optional.of(new Post()));
 
         // when & then
         mockMvc.perform(post("/posts")).andExpect(status().isForbidden());
@@ -53,7 +53,7 @@ class PostControllerTest {
     @Test
     public void testUpdatePostFailure() throws Exception {
         // given
-        when(postRepository.findById(any())).thenReturn(Optional.of(new Post()));
+        when(postRepository.findByIdAndDeletedAtIsNull(any())).thenReturn(Optional.of(new Post()));
 
         // when & then
         mockMvc.perform(post("/posts/" + 1)).andExpect(status().isForbidden());
@@ -62,7 +62,7 @@ class PostControllerTest {
     @Test
     public void testDeletePostFailure() throws Exception {
         // given
-        when(postRepository.findById(any())).thenReturn(Optional.of(new Post()));
+        when(postRepository.findByIdAndDeletedAtIsNull(any())).thenReturn(Optional.of(new Post()));
 
         // when & then
         mockMvc.perform(delete("/posts/" + 1)).andExpect(status().isForbidden());

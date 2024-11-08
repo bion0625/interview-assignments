@@ -2,6 +2,7 @@ package com.assignments.controller;
 
 import com.assignments.domain.entity.Post;
 import com.assignments.repository.PostRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,34 +19,36 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<Post> addPost(@RequestBody Post post) {
-        post.setUpdatedAt(LocalDateTime.now());
+        post.setCreatedAt(LocalDateTime.now());
         Post savedPost = postRepository.save(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Post> getPost(@PathVariable Long id) {
-        return postRepository.findById(id)
+        return postRepository.findByIdAndDeletedAtIsNull(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
-        return postRepository.findById(id)
+        return postRepository.findByIdAndDeletedAtIsNull(id)
                 .map(post -> {
                     post.setTitle(updatedPost.getTitle());
                     post.setContent(updatedPost.getContent());
                     post.setUpdatedAt(LocalDateTime.now());
-                    postRepository.save(post);
                     return ResponseEntity.ok(post);
                 })
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
-        postRepository.deleteById(id);
+        postRepository.findByIdAndDeletedAtIsNull(id).ifPresent(post -> post.setDeletedAt(LocalDateTime.now()));
+//        postRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
