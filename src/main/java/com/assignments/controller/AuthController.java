@@ -33,7 +33,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
-        User user = userRepository.findByUsername(request.getUsername())
+        User user = userRepository.findByUsernameAndDeletedAtIsNull(request.getUsername())
                 .orElse(null);
 
         if (user != null && passwordEncoder.matches(request.getPassword(), user.getPassword())) {

@@ -50,7 +50,7 @@ class UserControllerTest {
     @Test
     public void testAddUserSuccess() throws Exception {
         // given
-        when(userRepository.findByUsername(any())).thenReturn(Optional.empty());
+        when(userRepository.findByUsernameAndDeletedAtIsNull(any())).thenReturn(Optional.empty());
         Map<String, String> request = Map.of(
                 "username", "test",
                 "password", "qwer135!",
@@ -69,7 +69,7 @@ class UserControllerTest {
     @Test
     public void testAddUserFailure() throws Exception {
         // given
-        when(userRepository.findByUsername(any())).thenReturn(Optional.of(new User()));
+        when(userRepository.findByUsernameAndDeletedAtIsNull(any())).thenReturn(Optional.of(new User()));
         Map<String, String> request = Map.of(
                 "username", "test",
                 "password", "qwer135!",

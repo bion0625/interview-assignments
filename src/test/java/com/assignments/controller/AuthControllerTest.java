@@ -57,7 +57,7 @@ class AuthControllerTest {
     public void testLoginSuccess() throws Exception {
         // given
         when(passwordEncoder.matches(any(), any())).thenReturn(true);
-        when(userRepository.findByUsername(any())).thenReturn(Optional.of(new User()));
+        when(userRepository.findByUsernameAndDeletedAtIsNull(any())).thenReturn(Optional.of(new User()));
 
         Map<String, String> request = Map.of(
                 "username", "test",
@@ -75,7 +75,7 @@ class AuthControllerTest {
     public void testLoginFailure() throws Exception {
         // given
         when(passwordEncoder.matches(any(), any())).thenReturn(false);
-        when(userRepository.findByUsername(any())).thenReturn(Optional.of(new User()));
+        when(userRepository.findByUsernameAndDeletedAtIsNull(any())).thenReturn(Optional.of(new User()));
 
         Map<String, String> request = Map.of(
                 "username", "test",
