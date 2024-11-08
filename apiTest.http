@@ -1,0 +1,76 @@
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "test",
+  "password": "abc135!"
+}
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "username": "test",
+  "name": "testName",
+  "password": "abc135!"
+}
+
+###
+GET http://localhost:8080/users/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
+
+###
+PUT http://localhost:8080/users/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MyIsImV4cCI6MTczMTA2OTgwM30.c-0dd3Z_g47VFiH4FHuJYf40viJvy1UFxQgU8HeBrrJxEM3dQl9RYiV0OKPQsRzOT2fc3lUwujs3Kj3-WrO5yg
+
+{
+  "username": "test3",
+  "name": "testNameModfy33",
+  "password": "abc135!"
+}
+
+###
+DELETE http://localhost:8080/users/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDY3MDM3fQ.uGWx2jYu9eq93NtB4rC52hFvhDffGkaFe34PSwh0DpvlNnyIMcEN-uJwDSnSaQ3vzLS0n3AHdLkWquKrLeYo1g
+
+{
+  "username": "test",
+  "name": "testNameModfy",
+  "password": "abc135!"
+}
+
+###
+POST http://localhost:8080/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
+
+{
+  "title": "test title1",
+  "content": "test content1"
+}
+
+###
+PUT http://localhost:8080/posts/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
+
+{
+  "title": "test title",
+  "content": "test content modify"
+}
+
+###
+DELETE http://localhost:8080/posts/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
+
+###
+GET http://localhost:8080/protected
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDY4MzE2fQ.fc_V2igotAv-ducmOuXkea90os_4wobuqrU1qEeyzw5KyhkIEIxA1Tjy_qTZH0iJbrqCQs6QkWAjY3ygMMQluQ
+
