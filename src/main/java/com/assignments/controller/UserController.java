@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserRepository userRepository;
@@ -33,6 +33,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         return userRepository.findById(id)
+                .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
@@ -41,6 +42,7 @@ public class UserController {
     @Transactional
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         return userRepository.findById(id)
+                .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
                 .map(user -> {
                     user.setName(updatedUser.getName());
                     user.setGender(updatedUser.getGender());
@@ -56,6 +58,7 @@ public class UserController {
     @Transactional
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userRepository.findById(id)
+                .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
                 .ifPresent(user -> user.setDeletedAt(LocalDateTime.now()));
 //        userRepository.deleteById(id);
         return ResponseEntity.ok().build();
