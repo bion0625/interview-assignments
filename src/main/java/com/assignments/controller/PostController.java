@@ -1,7 +1,9 @@
 package com.assignments.controller;
 
 import com.assignments.domain.entity.Post;
+import com.assignments.domain.entity.User;
 import com.assignments.repository.PostRepository;
+import com.assignments.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,13 +14,18 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/posts")
-public class PostController {
+public class PostController extends BaseController {
 
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping
     public ResponseEntity<Post> addPost(@RequestBody Post post) {
+        User user = getAuthenticationName().map(name -> userRepository.findByUsernameAndDeletedAtIsNull(name)).orElseThrow().get();
+        post.setUser(user);
         post.setCreatedAt(LocalDateTime.now());
         Post savedPost = postRepository.save(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
@@ -35,6 +42,7 @@ public class PostController {
     @Transactional
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
         return postRepository.findByIdAndDeletedAtIsNull(id)
+                .filter(post -> getAuthenticationName().filter(name -> name.equals(post.getUser().getUsername())).isPresent())
                 .map(post -> {
                     post.setTitle(updatedPost.getTitle());
                     post.setContent(updatedPost.getContent());
@@ -47,7 +55,9 @@ public class PostController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
-        postRepository.findByIdAndDeletedAtIsNull(id).ifPresent(post -> post.setDeletedAt(LocalDateTime.now()));
+        postRepository.findByIdAndDeletedAtIsNull(id)
+                .filter(post -> getAuthenticationName().filter(name -> name.equals(post.getUser().getUsername())).isPresent())
+                .ifPresent(post -> post.setDeletedAt(LocalDateTime.now()));
 //        postRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }

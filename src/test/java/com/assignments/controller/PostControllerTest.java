@@ -3,6 +3,7 @@ package com.assignments.controller;
 import com.assignments.config.SecurityConfig;
 import com.assignments.domain.entity.Post;
 import com.assignments.repository.PostRepository;
+import com.assignments.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,6 +28,9 @@ class PostControllerTest {
 
     @MockBean
     private PostRepository postRepository;
+
+    @MockBean
+    private UserRepository userRepository;
 
     public PostControllerTest(@Autowired MockMvc mockMvc) {
         this.mockMvc = mockMvc;
