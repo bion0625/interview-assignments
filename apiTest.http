@@ -3,7 +3,7 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "username": "test",
+  "username": "test01",
   "password": "abc135!"
 }
 
@@ -12,29 +12,29 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "username": "test12345",
-  "name": "testName",
+  "username": "test01",
+  "name": "김테스트",
   "password": "abc135!"
 }
 
 ### 모든 유저 리스트 가져오기 (로그인 사용자만 접근)
 GET http://localhost:8080/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNDUiLCJleHAiOjE3MzExMjAyMTJ9.Li5h_nH8BsKDlEQ5EzIqwCi9s1XSf8C_C4tPCXcPn5E6qhFxxX_iuZ62W6qxmy7ujYjlr7A9jDF5r767RY9_Wg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
 
 
 ### 유저 본인 정보 가져오기
-GET http://localhost:8080/users/5
+GET http://localhost:8080/users/6
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNDUiLCJleHAiOjE3MzExMjAyMTJ9.Li5h_nH8BsKDlEQ5EzIqwCi9s1XSf8C_C4tPCXcPn5E6qhFxxX_iuZ62W6qxmy7ujYjlr7A9jDF5r767RY9_Wg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
 
 ### 유저 본인 정보 수정
-PUT http://localhost:8080/users/5
+PUT http://localhost:8080/users/6
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNDUiLCJleHAiOjE3MzExMjAyMTJ9.Li5h_nH8BsKDlEQ5EzIqwCi9s1XSf8C_C4tPCXcPn5E6qhFxxX_iuZ62W6qxmy7ujYjlr7A9jDF5r767RY9_Wg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
 
 {
-  "username": "test123",
+  "username": "test01",
   "name": "testNameModfy33",
   "password": "abc135!"
 }
@@ -53,7 +53,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNDUiLCJleHAiOjE3M
 ### 게시물 추가
 POST http://localhost:8080/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5OTI5fQ.3khxNN8xr-F20Qf9ATH3PK4GdtwNtj0UKk0MNZmJUQ9rG7TxDhR1of293Lp7T3y3FVYGjt1-po_YzaK9t6FoWA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
 
 {
   "title": "test title1",
@@ -61,9 +61,9 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5O
 }
 
 ### 본인 게시물 수정
-PUT http://localhost:8080/posts/17
+PUT http://localhost:8080/posts/19
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5OTI5fQ.3khxNN8xr-F20Qf9ATH3PK4GdtwNtj0UKk0MNZmJUQ9rG7TxDhR1of293Lp7T3y3FVYGjt1-po_YzaK9t6FoWA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
 
 {
   "title": "test title",
@@ -71,14 +71,14 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5O
 }
 
 ### 본인 게시물 삭제
-DELETE http://localhost:8080/posts/17
+DELETE http://localhost:8080/posts/19
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5OTI5fQ.3khxNN8xr-F20Qf9ATH3PK4GdtwNtj0UKk0MNZmJUQ9rG7TxDhR1of293Lp7T3y3FVYGjt1-po_YzaK9t6FoWA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
 
 ### 본인 게시물 호출
-GET http://localhost:8080/posts/18
+GET http://localhost:8080/posts/19
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5OTI5fQ.3khxNN8xr-F20Qf9ATH3PK4GdtwNtj0UKk0MNZmJUQ9rG7TxDhR1of293Lp7T3y3FVYGjt1-po_YzaK9t6FoWA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
 
 ### 인증
 GET http://localhost:8080/protected
