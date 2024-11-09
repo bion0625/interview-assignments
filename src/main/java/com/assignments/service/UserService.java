@@ -1,6 +1,7 @@
 package com.assignments.service;
 
 import com.assignments.domain.entity.User;
+import com.assignments.domain.vo.request.UserRequest;
 import com.assignments.domain.vo.response.UserResponse;
 import com.assignments.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsernameAndDeletedAtIsNull(username).isPresent();
     }
 
-    public UserResponse add(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return UserResponse.of(userRepository.save(user));
+    public UserResponse add(UserRequest user) {
+        User entity = user.toEntity();
+        entity.setPassword(passwordEncoder.encode(user.getPassword()));
+        return UserResponse.of(userRepository.save(entity));
     }
 
     public Optional<UserResponse> get(Long id) {
@@ -58,7 +60,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public Optional<UserResponse> update(Long id, User updatedUser) {
+    public Optional<UserResponse> update(Long id, UserRequest updatedUser) {
         return userRepository.findByIdAndDeletedAtIsNull(id)
                 .map(user -> {
                     user.setName(updatedUser.getName());

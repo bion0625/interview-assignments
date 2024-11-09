@@ -1,7 +1,7 @@
 package com.assignments.service;
 
 import com.assignments.domain.entity.Post;
-import com.assignments.domain.entity.User;
+import com.assignments.domain.vo.request.UserRequest;
 import com.assignments.domain.vo.response.PostResponse;
 import com.assignments.domain.vo.response.UserResponse;
 import org.junit.jupiter.api.Assertions;
@@ -32,7 +32,7 @@ class PostServiceTest {
 
     @BeforeEach
     public void setUp() {
-        User user = new User();
+        UserRequest user = new UserRequest();
         user.setPassword("qwer135!");
 
         user.setId(1L);

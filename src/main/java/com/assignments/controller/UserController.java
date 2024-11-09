@@ -1,6 +1,6 @@
 package com.assignments.controller;
 
-import com.assignments.domain.entity.User;
+import com.assignments.domain.vo.request.UserRequest;
 import com.assignments.domain.vo.response.UserResponse;
 import com.assignments.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ public class UserController extends BaseController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> addUser(@RequestBody User user) {
-        if (userService.isDuplicateByUsername(user.getUsername())) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.add(user));
+    public ResponseEntity<UserResponse> addUser(@RequestBody UserRequest request) {
+        if (userService.isDuplicateByUsername(request.getUsername())) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.add(request));
     }
 
     @GetMapping("/{id}")
@@ -44,10 +44,10 @@ public class UserController extends BaseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody UserRequest request) {
         if (userService.get(id).filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent()).isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        return userService.update(id, updatedUser)
+        return userService.update(id, request)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
