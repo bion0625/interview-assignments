@@ -1,13 +1,21 @@
 package com.assignments.controller;
 
 import com.assignments.domain.entity.User;
+import com.assignments.domain.vo.response.UserResponse;
 import com.assignments.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -22,25 +30,26 @@ public class UserController extends BaseController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user) {
+    public ResponseEntity<UserResponse> addUser(@RequestBody User user) {
         Optional<User> optionalUser = userRepository.findByUsernameAndDeletedAtIsNull(user.getUsername());
         if (optionalUser.isPresent()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User savedUser = userRepository.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserResponse.of(userRepository.save(user)));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    @Transactional(readOnly = true)
+    public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
         return userRepository.findByIdAndDeletedAtIsNull(id)
                 .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
+                .map(UserResponse::of)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         return userRepository.findByIdAndDeletedAtIsNull(id)
                 .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
                 .map(user -> {
@@ -49,7 +58,7 @@ public class UserController extends BaseController {
                     user.setAge(updatedUser.getAge());
                     user.setPhone(updatedUser.getPhone());
                     user.setUpdatedAt(LocalDateTime.now());
-                    return ResponseEntity.ok(user);
+                    return ResponseEntity.ok(UserResponse.of(user));
                 })
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

@@ -22,7 +22,7 @@ public class User extends Base {
     @Column(name = "gender")
     private String gender;
     @Column(name = "age")
-    private int age;
+    private Integer age;
     @Column(name = "phone")
     private String phone;
 

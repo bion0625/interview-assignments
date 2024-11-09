@@ -3,7 +3,7 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "username": "test",
+  "username": "test1234",
   "password": "abc135!"
 }
 
@@ -12,23 +12,23 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "username": "test",
+  "username": "test1234",
   "name": "testName",
   "password": "abc135!"
 }
 
 ### 유저 본인 정보 가져오기
-GET http://localhost:8080/users/1
+GET http://localhost:8080/users/4
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExNjM3NX0.TwyjlW85427QKixvc9MNi7hVoFD8rZ4rb1PkfpTJrqXi2H-dGLpTdhC1es1qJJ3NIjwr7HhRMWe7hQ_qMvWvdQ
 
 ### 유저 본인 정보 수정
-PUT http://localhost:8080/users/1
+PUT http://localhost:8080/users/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiZXhwIjoxNzMxMTE2Mjk4fQ.0AbG4RQIeuXHJdLfsD0Mfda2i2RB4zwn0_UhtmxXgqevF2bFFfZLg9FwMEWn6Ge5cB4RtD0pk0Sr-HFgJVJweQ
 
 {
-  "username": "test",
+  "username": "test123",
   "name": "testNameModfy33",
   "password": "abc135!"
 }
@@ -47,7 +47,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzN
 ### 게시물 추가
 POST http://localhost:8080/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiZXhwIjoxNzMxMTE0MzA1fQ.yZoEKgeNo23kxKKfyCiPbmmqjmTd5MZjFBhyOSOaHuOmIy1TijoT4JNnsQI20xiSVVeBxVRk8dEInwQ9LR9Qdw
 
 {
   "title": "test title1",
