@@ -1,7 +1,6 @@
 package com.assignments.controller;
 
 import com.assignments.domain.entity.User;
-import com.assignments.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -34,9 +33,6 @@ class UserControllerTest {
     private final MockMvc mockMvc;
 
     private final ObjectMapper objectMapper;
-
-    @Autowired
-    private UserService userService;
 
     public UserControllerTest(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) {
         this.mockMvc = mockMvc;

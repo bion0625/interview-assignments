@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsernameAndDeletedAtIsNull(username).isPresent();
     }
 
-    public UserResponse save(User user) {
+    public UserResponse add(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return UserResponse.of(userRepository.save(user));
     }

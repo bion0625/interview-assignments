@@ -32,7 +32,7 @@ public class UserController extends BaseController {
     @PostMapping
     public ResponseEntity<UserResponse> addUser(@RequestBody User user) {
         if (userService.isDuplicateByUsername(user.getUsername())) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.add(user));
     }
 
     @GetMapping("/{id}")
