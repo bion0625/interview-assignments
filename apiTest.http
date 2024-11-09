@@ -1,4 +1,4 @@
-###
+### 로그인
 POST http://localhost:8080/login
 Content-Type: application/json
 
@@ -7,7 +7,7 @@ Content-Type: application/json
   "password": "abc135!"
 }
 
-###
+### 가입
 POST http://localhost:8080/users
 Content-Type: application/json
 
@@ -17,26 +17,26 @@ Content-Type: application/json
   "password": "abc135!"
 }
 
-###
-GET http://localhost:8080/users/2
+### 유저 본인 정보 가져오기
+GET http://localhost:8080/users/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
 
-###
-PUT http://localhost:8080/users/3
+### 유저 본인 정보 수정
+PUT http://localhost:8080/users/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MyIsImV4cCI6MTczMTA2OTgwM30.c-0dd3Z_g47VFiH4FHuJYf40viJvy1UFxQgU8HeBrrJxEM3dQl9RYiV0OKPQsRzOT2fc3lUwujs3Kj3-WrO5yg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
 
 {
-  "username": "test3",
+  "username": "test",
   "name": "testNameModfy33",
   "password": "abc135!"
 }
 
-###
-DELETE http://localhost:8080/users/2
+### 유저 삭제(탈퇴)
+DELETE http://localhost:8080/users/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDY3MDM3fQ.uGWx2jYu9eq93NtB4rC52hFvhDffGkaFe34PSwh0DpvlNnyIMcEN-uJwDSnSaQ3vzLS0n3AHdLkWquKrLeYo1g
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
 
 {
   "username": "test",
@@ -44,7 +44,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDY3M
   "password": "abc135!"
 }
 
-###
+### 게시물 추가
 POST http://localhost:8080/posts
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
@@ -54,7 +54,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxM
   "content": "test content1"
 }
 
-###
+### 본인 게시물 수정
 PUT http://localhost:8080/posts/1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
@@ -64,12 +64,12 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxM
   "content": "test content modify"
 }
 
-###
+### 본인 게시물 삭제
 DELETE http://localhost:8080/posts/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
 
-###
+### 게시물 호출
 GET http://localhost:8080/protected
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDY4MzE2fQ.fc_V2igotAv-ducmOuXkea90os_4wobuqrU1qEeyzw5KyhkIEIxA1Tjy_qTZH0iJbrqCQs6QkWAjY3ygMMQluQ

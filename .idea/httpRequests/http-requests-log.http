@@ -1,0 +1,224 @@
+POST http://localhost:8080/login
+Content-Type: application/json
+Content-Length: 49
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "password": "abc135!"
+}
+
+###
+
+GET http://localhost:8080/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+GET http://localhost:8080/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-11-09T092608.200.json
+
+###
+
+GET http://localhost:8080/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-11-09T092553.200.json
+
+###
+
+DELETE http://localhost:8080/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Content-Length: 76
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "name": "testNameModfy",
+  "password": "abc135!"
+}
+
+###
+
+DELETE http://localhost:8080/users/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Content-Length: 76
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "name": "testNameModfy",
+  "password": "abc135!"
+}
+
+###
+
+PUT http://localhost:8080/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Content-Length: 78
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "name": "testNameModfy33",
+  "password": "abc135!"
+}
+
+<> 2024-11-09T092527.200.json
+
+###
+
+PUT http://localhost:8080/users/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Content-Length: 78
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "name": "testNameModfy33",
+  "password": "abc135!"
+}
+
+###
+
+PUT http://localhost:8080/users/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Content-Length: 78
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "name": "testNameModfy33",
+  "password": "abc135!"
+}
+
+###
+
+PUT http://localhost:8080/users/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Content-Length: 79
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test3",
+  "name": "testNameModfy33",
+  "password": "abc135!"
+}
+
+###
+
+GET http://localhost:8080/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-11-09T092437.200.json
+
+###
+
+GET http://localhost:8080/users/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzNjQ3fQ.HUudeHSCP8kyL4HtHPJI5Yx07R6sMNtay8gMJbC110fTCEoco-MvDQJR1Fca-UIwBqktkm62CK__IpweE6v_Rg
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+Content-Length: 49
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "password": "abc135!"
+}
+
+<> 2024-11-09T092407.200.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "name": "testName",
+  "password": "abc135!"
+}
+
+<> 2024-11-09T092354.201.json
+
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+Content-Length: 49
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "password": "abc135!"
+}
+
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+Content-Length: 49
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "test",
+  "password": "abc135!"
+}
+
+###
+

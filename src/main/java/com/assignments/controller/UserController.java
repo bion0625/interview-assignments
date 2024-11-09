@@ -32,7 +32,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
-        return userRepository.findById(id)
+        return userRepository.findByIdAndDeletedAtIsNull(id)
                 .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -41,7 +41,7 @@ public class UserController extends BaseController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-        return userRepository.findById(id)
+        return userRepository.findByIdAndDeletedAtIsNull(id)
                 .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
                 .map(user -> {
                     user.setName(updatedUser.getName());
@@ -57,7 +57,7 @@ public class UserController extends BaseController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userRepository.findById(id)
+        userRepository.findByIdAndDeletedAtIsNull(id)
                 .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
                 .ifPresent(user -> user.setDeletedAt(LocalDateTime.now()));
 //        userRepository.deleteById(id);
