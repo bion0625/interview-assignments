@@ -42,7 +42,7 @@ public class UserController extends BaseController {
     public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
         return userRepository.findByIdAndDeletedAtIsNull(id)
                 .filter(user -> getAuthenticationName().filter(name -> name.equals(user.getUsername())).isPresent())
-                .map(UserResponse::of)
+                .map(UserResponse::ofWithPost)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

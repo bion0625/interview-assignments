@@ -20,7 +20,7 @@ Content-Type: application/json
 ### 유저 본인 정보 가져오기
 GET http://localhost:8080/users/4
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExNjM3NX0.TwyjlW85427QKixvc9MNi7hVoFD8rZ4rb1PkfpTJrqXi2H-dGLpTdhC1es1qJJ3NIjwr7HhRMWe7hQ_qMvWvdQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExNjkwN30.p3jZw-M0Zkj2xhKcua_pTeF0qJEW9UDgcWVf2EjieeeCnlfVGBSyh-ywSc1ChaUBb-PS95YUXOXOdvcudaDpLQ
 
 ### 유저 본인 정보 수정
 PUT http://localhost:8080/users/3
@@ -47,7 +47,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTEzN
 ### 게시물 추가
 POST http://localhost:8080/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiZXhwIjoxNzMxMTE0MzA1fQ.yZoEKgeNo23kxKKfyCiPbmmqjmTd5MZjFBhyOSOaHuOmIy1TijoT4JNnsQI20xiSVVeBxVRk8dEInwQ9LR9Qdw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExNzAyOH0.sZVjc00JLE-OS4-Xl4RKUxdS-8BbJN3QkbTIP2qjW-BvgFX5CTw-VLgFemhHieQ2PjlMF7dmYx3tgMG0NrBPRg
 
 {
   "title": "test title1",
@@ -55,9 +55,9 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiZXhwIjoxNzMxM
 }
 
 ### 본인 게시물 수정
-PUT http://localhost:8080/posts/1
+PUT http://localhost:8080/posts/15
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExNzAyOH0.sZVjc00JLE-OS4-Xl4RKUxdS-8BbJN3QkbTIP2qjW-BvgFX5CTw-VLgFemhHieQ2PjlMF7dmYx3tgMG0NrBPRg
 
 {
   "title": "test title",

@@ -1,7 +1,6 @@
 package com.assignments.domain.vo.response;
 
 import com.assignments.domain.entity.User;
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.List;
@@ -18,6 +17,15 @@ public class UserResponse {
 
     private List<PostResponse> posts;
 
+    public UserResponse(Long id, String username, String name, String gender, Integer age, String phone) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.phone = phone;
+    }
+
     public UserResponse(Long id, String username, String name, String gender, Integer age, String phone, List<PostResponse> posts) {
         this.id = id;
         this.username = username;
@@ -29,6 +37,16 @@ public class UserResponse {
     }
 
     public static UserResponse of(User user) {
+        return new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getName(),
+                user.getGender(),
+                user.getAge(),
+                user.getPhone());
+    }
+
+    public static UserResponse ofWithPost(User user) {
         return new UserResponse(
                 user.getId(),
                 user.getUsername(),

@@ -2,12 +2,13 @@ package com.assignments.controller;
 
 import com.assignments.domain.entity.Post;
 import com.assignments.domain.entity.User;
+import com.assignments.domain.vo.response.PostResponse;
 import com.assignments.repository.PostRepository;
 import com.assignments.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -23,31 +24,34 @@ public class PostController extends BaseController {
     private UserRepository userRepository;
 
     @PostMapping
-    public ResponseEntity<Post> addPost(@RequestBody Post post) {
+    @Transactional
+    public ResponseEntity<PostResponse> addPost(@RequestBody Post post) {
         User user = getAuthenticationName().map(name -> userRepository.findByUsernameAndDeletedAtIsNull(name)).orElseThrow().get();
         post.setUser(user);
         post.setCreatedAt(LocalDateTime.now());
         Post savedPost = postRepository.save(post);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
+        return ResponseEntity.status(HttpStatus.CREATED).body(PostResponse.of(savedPost));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPost(@PathVariable Long id) {
+    @Transactional(readOnly = true)
+    public ResponseEntity<PostResponse> getPost(@PathVariable Long id) {
         return postRepository.findByIdAndDeletedAtIsNull(id)
+                .map(PostResponse::of)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
+    public ResponseEntity<PostResponse> updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
         return postRepository.findByIdAndDeletedAtIsNull(id)
                 .filter(post -> getAuthenticationName().filter(name -> name.equals(post.getUser().getUsername())).isPresent())
                 .map(post -> {
                     post.setTitle(updatedPost.getTitle());
                     post.setContent(updatedPost.getContent());
                     post.setUpdatedAt(LocalDateTime.now());
-                    return ResponseEntity.ok(post);
+                    return ResponseEntity.ok(PostResponse.ofWithUser(post));
                 })
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
