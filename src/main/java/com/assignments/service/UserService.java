@@ -49,6 +49,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsernameAndDeletedAtIsNull(username).isPresent();
     }
 
+    @Transactional
     public UserResponse add(UserRequest user) {
         User entity = user.toEntity();
         entity.setPassword(passwordEncoder.encode(user.getPassword()));
