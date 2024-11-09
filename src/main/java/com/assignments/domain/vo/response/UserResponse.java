@@ -54,7 +54,7 @@ public class UserResponse {
                 user.getGender(),
                 user.getAge(),
                 user.getPhone(),
-                user.getPosts().stream()
+                user.getPosts() == null ? null : user.getPosts().stream()
                         .map(PostResponse::of).collect(Collectors.toList()));
     }
 }

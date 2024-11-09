@@ -6,6 +6,7 @@ import com.assignments.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Date;
 import java.util.Map;
@@ -33,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(AuthController.class)
 @AutoConfigureMockMvc
 @Import(SecurityConfig.class)
+@DisplayName("단위 테스트: About [AuthController]")
 class AuthControllerTest {
 
     private final MockMvc mockMvc;
@@ -95,10 +96,9 @@ class AuthControllerTest {
         headers.add("Authorization", "Bearer " + getToken());
 
         // when & then
-        MvcResult user = mockMvc.perform(get("/protected")
+        mockMvc.perform(get("/protected")
                         .headers(headers))
-                .andExpect(status().isOk()).andReturn();
-        System.out.println(user);
+                .andExpect(status().isOk());
     }
 
     private String getToken() {
