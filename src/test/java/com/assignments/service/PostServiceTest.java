@@ -1,6 +1,6 @@
 package com.assignments.service;
 
-import com.assignments.domain.entity.Post;
+import com.assignments.domain.vo.request.PostRequest;
 import com.assignments.domain.vo.request.UserRequest;
 import com.assignments.domain.vo.response.PostResponse;
 import com.assignments.domain.vo.response.UserResponse;
@@ -28,7 +28,7 @@ class PostServiceTest {
     static UserResponse user1;
     static UserResponse user2;
 
-    static Post post;
+    static PostRequest post;
 
     @BeforeEach
     public void setUp() {
@@ -43,7 +43,7 @@ class PostServiceTest {
         user.setUsername("username2");
         user.setName("name2");
         user2 = userService.add(user);
-        post = new Post();
+        post = new PostRequest();
         post.setId(1L);
         post.setTitle("title");
         post.setContent("content");
@@ -54,7 +54,7 @@ class PostServiceTest {
     public void givenAdd_whenPut_thenSuccess() {
         // given
         PostResponse postResponse = postService.add(post, user1.getUsername());
-        Post updatedPost = new Post();
+        PostRequest updatedPost = new PostRequest();
         updatedPost.setId(postResponse.getId());
         updatedPost.setTitle(postResponse.getTitle() + " modify");
         updatedPost.setContent(postResponse.getContent() + " modify");
@@ -75,7 +75,7 @@ class PostServiceTest {
     public void givenAdd_whenPut_thenFailure() {
         // given
         PostResponse postResponse = postService.add(post, user1.getUsername());
-        Post updatedPost = new Post();
+        PostRequest updatedPost = new PostRequest();
         updatedPost.setId(postResponse.getId());
         updatedPost.setTitle(postResponse.getTitle() + " modify");
         updatedPost.setContent(postResponse.getContent() + " modify");

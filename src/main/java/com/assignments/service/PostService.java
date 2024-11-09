@@ -1,6 +1,7 @@
 package com.assignments.service;
 
 import com.assignments.domain.entity.Post;
+import com.assignments.domain.vo.request.PostRequest;
 import com.assignments.domain.vo.response.PostResponse;
 import com.assignments.repository.PostRepository;
 import com.assignments.repository.UserRepository;
@@ -22,10 +23,11 @@ public class PostService {
     private UserRepository userRepository;
 
     @Transactional
-    public PostResponse add(Post post, String username) {
-        post.setUser(userRepository.findByUsernameAndDeletedAtIsNull(username).orElseThrow());
-        post.setCreatedAt(LocalDateTime.now());
-        return PostResponse.of(postRepository.save(post));
+    public PostResponse add(PostRequest post, String username) {
+        Post entity = post.toEntity();
+        entity.setUser(userRepository.findByUsernameAndDeletedAtIsNull(username).orElseThrow());
+        entity.setCreatedAt(LocalDateTime.now());
+        return PostResponse.of(postRepository.save(entity));
     }
 
     public Optional<PostResponse> get(Long id) {
@@ -33,7 +35,7 @@ public class PostService {
     }
 
     @Transactional
-    public Optional<PostResponse> update(Long id, Post updatedPost, String username) {
+    public Optional<PostResponse> update(Long id, PostRequest updatedPost, String username) {
         return postRepository.findByIdAndDeletedAtIsNull(id)
                 .filter(post -> username.equals(post.getUser().getUsername()))
                 .map(post -> {

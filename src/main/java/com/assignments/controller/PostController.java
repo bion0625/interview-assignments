@@ -1,6 +1,6 @@
 package com.assignments.controller;
 
-import com.assignments.domain.entity.Post;
+import com.assignments.domain.vo.request.PostRequest;
 import com.assignments.domain.vo.response.PostResponse;
 import com.assignments.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +25,9 @@ public class PostController extends BaseController {
     private PostService postService;
 
     @PostMapping
-    public ResponseEntity<PostResponse> addPost(@RequestBody Post post) {
+    public ResponseEntity<PostResponse> addPost(@RequestBody PostRequest request) {
         Optional<String> username = getAuthenticationName();
-        return username.map(s -> ResponseEntity.status(HttpStatus.CREATED).body(postService.add(post, s)))
+        return username.map(s -> ResponseEntity.status(HttpStatus.CREATED).body(postService.add(request, s)))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
@@ -39,10 +39,10 @@ public class PostController extends BaseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostResponse> updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
+    public ResponseEntity<PostResponse> updatePost(@PathVariable Long id, @RequestBody PostRequest request) {
         Optional<String> username = getAuthenticationName();
         return username
-                .map(s -> postService.update(id, updatedPost, s)
+                .map(s -> postService.update(id, request, s)
                         .map(ResponseEntity::ok)
                         .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build()))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
