@@ -75,10 +75,13 @@ DELETE http://localhost:8080/posts/19
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
 
-### 본인 게시물 호출
-GET http://localhost:8080/posts/19
+### 특정 게시물 호출
+GET http://localhost:8080/posts/6
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MDEiLCJleHAiOjE3MzExNDM2Mzd9.osBk2cCzeWtr5aucybozDavz8bjLNGcUhafSRZ8-vmeDaIwUH_XvyCNfGH3yk4rUK_EVFOM-IWk-50JYbOJ6jQ
+
+### 모든 게시물 호출
+GET http://localhost:8080/posts
+Content-Type: application/json
 
 ### 인증
 GET http://localhost:8080/protected

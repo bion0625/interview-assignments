@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -21,6 +23,12 @@ public class PostService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public List<PostResponse> getAll() {
+        return postRepository.findAllByDeletedAtIsNull().stream()
+                .map(PostResponse::of)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
     public PostResponse add(PostRequest post, String username) {
