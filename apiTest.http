@@ -3,7 +3,7 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "username": "test12345",
+  "username": "test",
   "password": "abc135!"
 }
 
@@ -53,7 +53,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNDUiLCJleHAiOjE3M
 ### 게시물 추가
 POST http://localhost:8080/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNDUiLCJleHAiOjE3MzExMjAyMTJ9.Li5h_nH8BsKDlEQ5EzIqwCi9s1XSf8C_C4tPCXcPn5E6qhFxxX_iuZ62W6qxmy7ujYjlr7A9jDF5r767RY9_Wg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5OTI5fQ.3khxNN8xr-F20Qf9ATH3PK4GdtwNtj0UKk0MNZmJUQ9rG7TxDhR1of293Lp7T3y3FVYGjt1-po_YzaK9t6FoWA
 
 {
   "title": "test title1",
@@ -61,9 +61,9 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNDUiLCJleHAiOjE3M
 }
 
 ### 본인 게시물 수정
-PUT http://localhost:8080/posts/15
+PUT http://localhost:8080/posts/17
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExNzAyOH0.sZVjc00JLE-OS4-Xl4RKUxdS-8BbJN3QkbTIP2qjW-BvgFX5CTw-VLgFemhHieQ2PjlMF7dmYx3tgMG0NrBPRg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5OTI5fQ.3khxNN8xr-F20Qf9ATH3PK4GdtwNtj0UKk0MNZmJUQ9rG7TxDhR1of293Lp7T3y3FVYGjt1-po_YzaK9t6FoWA
 
 {
   "title": "test title",
@@ -71,11 +71,16 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczM
 }
 
 ### 본인 게시물 삭제
-DELETE http://localhost:8080/posts/2
+DELETE http://localhost:8080/posts/17
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDcxMDE2fQ.v2rpbaRmqolEsGp9cqObDKuec1PvkA4qJzWCVQIOjXm6YOPwULYl6HbqbMhRQIeXjfcInhjDFBy1MbF37Sw5iA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5OTI5fQ.3khxNN8xr-F20Qf9ATH3PK4GdtwNtj0UKk0MNZmJUQ9rG7TxDhR1of293Lp7T3y3FVYGjt1-po_YzaK9t6FoWA
 
-### 게시물 호출
+### 본인 게시물 호출
+GET http://localhost:8080/posts/18
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMTM5OTI5fQ.3khxNN8xr-F20Qf9ATH3PK4GdtwNtj0UKk0MNZmJUQ9rG7TxDhR1of293Lp7T3y3FVYGjt1-po_YzaK9t6FoWA
+
+### 인증
 GET http://localhost:8080/protected
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNzMxMDY4MzE2fQ.fc_V2igotAv-ducmOuXkea90os_4wobuqrU1qEeyzw5KyhkIEIxA1Tjy_qTZH0iJbrqCQs6QkWAjY3ygMMQluQ
