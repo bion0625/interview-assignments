@@ -11,6 +11,8 @@ public class PostResponse {
 
     private UserResponse user;
 
+    public PostResponse() {}
+
     public PostResponse(Long id, String title, String content) {
         this.id = id;
         this.title = title;
