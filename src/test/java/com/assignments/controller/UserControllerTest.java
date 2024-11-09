@@ -18,7 +18,9 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UserController.class)
@@ -39,10 +41,20 @@ class UserControllerTest {
     }
 
     @Test
+    public void testGetUsersFailure() throws Exception {
+        // given
+
+        // when & then
+        mockMvc.perform(get("/users")).andExpect(status().isForbidden());
+    }
+
+    @Test
     public void testAddUserSuccess() throws Exception {
         // given
         when(userRepository.findByUsernameAndDeletedAtIsNull(any())).thenReturn(Optional.empty());
+        when(userRepository.save(any())).thenReturn(new User());
         Map<String, String> request = Map.of(
+                "id", "100",
                 "username", "test",
                 "password", "qwer135!",
                 "name", "testName",

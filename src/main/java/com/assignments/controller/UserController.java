@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -28,6 +30,14 @@ public class UserController extends BaseController {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> getUsers() {
+        return ResponseEntity.ok(
+                userRepository.findAllByDeletedAtIsNull().stream()
+                        .map(UserResponse::of)
+                        .collect(Collectors.toList()));
+    }
 
     @PostMapping
     public ResponseEntity<UserResponse> addUser(@RequestBody User user) {

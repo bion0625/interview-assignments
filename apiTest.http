@@ -17,10 +17,16 @@ Content-Type: application/json
   "password": "abc135!"
 }
 
+### 모든 유저 리스트 가져오기 (로그인 사용자만 접근)
+GET http://localhost:8080/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExODc3OX0.xYCNoIgor-ZXUsdxrVAMbwMv7BsRNerns2Ca1TB-CIwOlJ3mlrFQB1g5NP5EiUosmZ_1jrqi0yPnRSq36iXErA
+
+
 ### 유저 본인 정보 가져오기
 GET http://localhost:8080/users/4
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExNjkwN30.p3jZw-M0Zkj2xhKcua_pTeF0qJEW9UDgcWVf2EjieeeCnlfVGBSyh-ywSc1ChaUBb-PS95YUXOXOdvcudaDpLQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzNCIsImV4cCI6MTczMTExODc3OX0.xYCNoIgor-ZXUsdxrVAMbwMv7BsRNerns2Ca1TB-CIwOlJ3mlrFQB1g5NP5EiUosmZ_1jrqi0yPnRSq36iXErA
 
 ### 유저 본인 정보 수정
 PUT http://localhost:8080/users/3
