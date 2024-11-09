@@ -1,8 +1,8 @@
 package com.assignments.controller;
 
 import com.assignments.config.SecurityConfig;
-import com.assignments.domain.entity.User;
-import com.assignments.repository.UserRepository;
+import com.assignments.domain.vo.response.UserResponse;
+import com.assignments.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Map;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -33,7 +32,7 @@ class UserControllerTest {
     private final ObjectMapper objectMapper;
 
     @MockBean
-    private UserRepository userRepository;
+    private UserService userService;
 
     public UserControllerTest(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) {
         this.mockMvc = mockMvc;
@@ -51,8 +50,8 @@ class UserControllerTest {
     @Test
     public void testAddUserSuccess() throws Exception {
         // given
-        when(userRepository.findByUsernameAndDeletedAtIsNull(any())).thenReturn(Optional.empty());
-        when(userRepository.save(any())).thenReturn(new User());
+        when(userService.isDuplicateByUsername(any())).thenReturn(false);
+        when(userService.save(any())).thenReturn(new UserResponse(1L, "test", "testName", "M", 30, "01012341234"));
         Map<String, String> request = Map.of(
                 "id", "100",
                 "username", "test",
@@ -72,7 +71,7 @@ class UserControllerTest {
     @Test
     public void testAddUserFailure() throws Exception {
         // given
-        when(userRepository.findByUsernameAndDeletedAtIsNull(any())).thenReturn(Optional.of(new User()));
+        when(userService.isDuplicateByUsername(any())).thenReturn(true);
         Map<String, String> request = Map.of(
                 "username", "test",
                 "password", "qwer135!",
